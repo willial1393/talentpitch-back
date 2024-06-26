@@ -12,6 +12,7 @@ services:
       - .:/var/www
     networks:
       - laravel
+    command: bash -c "composer install && php-fpm"
 
   web:
     image: nginx:alpine

@@ -19,14 +19,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 
 # Copiar archivos de la aplicación
-COPY . .
+COPY . /var/www
 
 # Instalar dependencias de PHP
-ENV COMPOSER_ALLOW_SUPERUSER=1
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install
 
 # Dar permisos al directorio de almacenamiento y caché
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN chown -R www-data:www-data /var/www
+RUN chmod 755 /var/www
 
 # Exponer el puerto 9000 y definir el comando de inicio
 EXPOSE 9000
